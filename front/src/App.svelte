@@ -15,7 +15,7 @@
   import FloatButton from "./components/FloatButton.svelte";
   import EmojiStatus from "./components/EmojiStatus.svelte";
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  //const API_URL = import.meta.env.VITE_API_URL;
   let text;
   let loading = false;
   let responses = [];
@@ -31,7 +31,7 @@
   const onSubmit = async () => {
     try {
       loading = true;
-      const response = await fetch(`${API_URL}/post`, {
+      const response = await fetch(`/post`, {
         method: "POST",
         body: JSON.stringify({ text, userPreferences: addKnowToApp() }),
         headers: {
@@ -121,7 +121,7 @@
     </div>
     <div class="mb-4 mt-8">
       <Alert>
-        <P size="base">Hello! Welcome to AI Personal Diary</P>
+        <P size="base">Hello! Welcome to LifeLog AI</P>
         <P size="sm"
           >You can add entries to the diary and the AI will assess your mood 😊</P
         >
