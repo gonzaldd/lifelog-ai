@@ -3,6 +3,7 @@ import express from 'express';
 import cohere from 'cohere-ai';
 import { readFile } from 'fs/promises';
 import cors from 'cors';
+import path from "path";
 
 dotenv.config();
 
@@ -16,9 +17,16 @@ cohere.init(process.env.COHERE_API_TOKEN);
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: '*',
-}));
+
+if(process.env.ENVIROMENT === 'DEV')
+  app.use(cors({ origin: '*' }));
+
+app.use(express.static("dist"));
+
+app.get("/", (req, res) => {
+  console.log(process.env.PWD)
+  res.sendFile(`${process.env.PWD}/dist/index.html`);
+});
 
 app.post('/post', async (req, res) => {
   try {
