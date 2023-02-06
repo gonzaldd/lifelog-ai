@@ -115,7 +115,7 @@
 </script>
 
 <div class="containerMain">
-  <Card rounded style="max-width: 60vw; width: 50vw;">
+  <Card rounded class="md:min-w-[55%]">
     <div class="flex justify-center flex-col">
       <div class="text-7xl">😎</div>
     </div>
@@ -174,10 +174,9 @@
 
 <style>
   .containerMain {
-    width: 100%;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     margin-top: 10px;
+    align-items: center;
   }
 </style>
