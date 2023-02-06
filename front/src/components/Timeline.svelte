@@ -5,7 +5,7 @@
 </script>
 
 {#if responses?.length > 0}
-  <Card class="mt-5 text-left" style="max-width: 60vw; width: 50vw;">
+  <Card rounded class="mt-5 text-left md:min-w-[55%] w-full">
     <Timeline>
       {#await responses then}
         {#each responses as response}
