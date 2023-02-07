@@ -31,7 +31,7 @@
   const onSubmit = async () => {
     try {
       loading = true;
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/post`, {
+      const response = await fetch(`/post`, {
         method: "POST",
         body: JSON.stringify({ text, userPreferences: addKnowToApp() }),
         headers: {
