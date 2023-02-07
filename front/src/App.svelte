@@ -31,7 +31,7 @@
   const onSubmit = async () => {
     try {
       loading = true;
-      const response = await fetch(`/post`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/post`, {
         method: "POST",
         body: JSON.stringify({ text, userPreferences: addKnowToApp() }),
         headers: {
@@ -42,8 +42,8 @@
       const data = await response.json();
 
       responses = [
-        ...responses,
         { text, result: data, date: date.toISOString() },
+        ...responses,
       ];
 
       localStorage.setItem("userData", JSON.stringify(responses));
