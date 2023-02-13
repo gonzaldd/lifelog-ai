@@ -112,6 +112,16 @@
       console.log("Error on load user data");
     }
   });
+
+  const changeResponse = (e) => {
+    const index = e.detail.index;
+    if (responses[index].result?.result === "negative") {
+      responses[index].result.result = "positive";
+    } else {
+      responses[index].result.result = "negative";
+    }
+    localStorage.setItem("userData", JSON.stringify(responses));
+  };
 </script>
 
 <div class="containerMain">
@@ -151,7 +161,7 @@
       Send
     </Button>
   </Card>
-  <TimeLineComponent {responses} />
+  <TimeLineComponent {responses} on:changeResponse={changeResponse} />
   <FloatButton on:reset={clearUserData} />
   <Toast position="top-right" bind:open={apiError} color="red"
     ><svelte:fragment slot="icon">
