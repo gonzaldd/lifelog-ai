@@ -15,7 +15,7 @@
   import FloatButton from "./components/FloatButton.svelte";
   import EmojiStatus from "./components/EmojiStatus.svelte";
 
-  //const API_URL = import.meta.env.VITE_API_URL;
+  const { VITE_API_URL } = import.meta.env;
   let text;
   let loading = false;
   let responses = [];
@@ -31,7 +31,7 @@
   const onSubmit = async () => {
     try {
       loading = true;
-      const response = await fetch(`/post`, {
+      const response = await fetch(`${VITE_API_URL || ""}/post`, {
         method: "POST",
         body: JSON.stringify({ text, userPreferences: addKnowToApp() }),
         headers: {
@@ -133,7 +133,12 @@
       <Alert>
         <P size="base">Hello! Welcome to LifeLog AI</P>
         <P size="sm"
-          >You can add entries to the diary and the AI will assess your mood 😊</P
+          >LifeLog AI is a personal diary application that uses artificial
+          intelligence to help you keep track of your thoughts, feelings, and
+          emotions. The app will help you detect if your day has been good or
+          bad and better understand how you're feeling. With LifeLog AI, you'll
+          be able to track your emotions and progress towards a more balanced
+          and happy life.</P
         >
       </Alert>
     </div>
