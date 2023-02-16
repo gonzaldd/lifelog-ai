@@ -3,20 +3,21 @@ import express from 'express';
 import cohere from 'cohere-ai';
 import { readFile } from 'fs/promises';
 import cors from 'cors';
-import path from "path";
+
+import reCaptchaMiddleware from './middlewares/reCaptchaMiddleware.js'
 
 dotenv.config();
 
 const { defaultPreferences } = JSON.parse(
   await readFile(
     new URL('./default-examples.json', import.meta.url),
-  ),
+  )
 );
 
 cohere.init(process.env.COHERE_API_TOKEN);
 
 const app = express();
-app.use(express.json());
+app.use(express.json());  
 
 if(process.env.ENVIROMENT === 'DEV')
   app.use(cors({ origin: '*' }));
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
   res.sendFile(`${process.env.PWD}/dist/index.html`);
 });
 
-app.post('/post', async (req, res) => {
+app.post('/post', reCaptchaMiddleware, async (req, res, next) => {
   try {
     const { text, userPreferences } = req.body;
     const examples = Array.isArray(userPreferences) && userPreferences.length > 0 ? [...defaultPreferences, ...userPreferences] : defaultPreferences;
@@ -44,7 +45,8 @@ app.post('/post', async (req, res) => {
       confidence: body?.classifications[0]?.confidence,
     });
   } catch (error) {
-    res.status(500);
+    console.log("ERROR", error)
+    res.status(500).send("error");
   }
 });
 
