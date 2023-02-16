@@ -15,7 +15,7 @@
   import FloatButton from "./components/FloatButton.svelte";
   import EmojiStatus from "./components/EmojiStatus.svelte";
 
-  const { VITE_API_URL } = import.meta.env;
+  const { VITE_API_URL, VITE_RECAPTCHA_KEY } = import.meta.env;
   let text;
   let loading = false;
   let responses = [];
@@ -33,7 +33,11 @@
       loading = true;
       const response = await fetch(`${VITE_API_URL || ""}/post`, {
         method: "POST",
-        body: JSON.stringify({ text, userPreferences: addKnowToApp() }),
+        body: JSON.stringify({
+          text,
+          userPreferences: addKnowToApp(),
+          "g-recaptcha-response": await doRecaptcha(),
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -122,6 +126,19 @@
     }
     localStorage.setItem("userData", JSON.stringify(responses));
   };
+
+  const doRecaptcha = async () => {
+    return new Promise((resolve, reject) => {
+      grecaptcha.ready(() =>
+        grecaptcha
+          .execute(VITE_RECAPTCHA_KEY, { action: "submit" })
+          .then(function (t) {
+            resolve(t);
+          })
+          .catch((err) => reject(err))
+      );
+    });
+  };
 </script>
 
 <div class="containerMain">
@@ -185,6 +202,11 @@
       <span class="sr-only">Warning icon</span>
     </svelte:fragment>An error has occurred. Try again</Toast
   >
+  <script
+    src="https://www.google.com/recaptcha/api.js?render={VITE_RECAPTCHA_KEY}"
+    async
+    defer
+  ></script>
 </div>
 
 <style>
