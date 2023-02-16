@@ -38,6 +38,8 @@ Install dependencies
   yarn
 ```
 
+Complete .env in back and front
+
 Start the server
 
 ```bash
@@ -52,11 +54,11 @@ Start the front
 
 ## Roadmap
 
-- Permitir modificar el tipo y porcentaje en el listado de posts
+- ~~Permitir modificar el tipo y porcentaje en el listado de posts~~
 
 - Agregar nuevas emociones al clasificador
 
-- Mejorar el responsive
+- ~~Mejorar el responsive~~
 
 ## Authors
 
