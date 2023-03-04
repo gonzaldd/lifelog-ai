@@ -1,0 +1,14 @@
+{
+  "name": "life_log_ai",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["back", "front"],
+  "scripts": {
+    "front-dev": "yarn workspace front dev",
+    "back-dev": "yarn workspace back dev",
+    "front-build": "yarn workspace front build",
+    "deploy-prod": "yarn workspace front build && cd back && fly deploy"
+  }
+}

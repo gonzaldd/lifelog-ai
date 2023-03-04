@@ -1,0 +1,16 @@
+{ 
+  "defaultPreferences": [
+    { "text": "Today was a very dificult day", "label": "negative" },
+    { "text":"I had a fight with my parents and brothers", "label": "negative" },
+    { "text": "My dog is sick and i'm so sad.", "label": "negative" },
+    {"text": "bad", "label": "negative"},
+    {"text": "I'm very bad", "label": "negative"},
+    {"text": "hate", "label": "negative"},
+    
+    { "text": "I love my work", "label": "positive" },
+    { "text": "I'm very happy", "label": "positive" },
+    { "text": "I love to have fun with friends", "label": "positive" },
+    {"text": "I love gifts", "label":"positive"},
+    { "text": "good", "label": "positive" }
+  ]
+}
